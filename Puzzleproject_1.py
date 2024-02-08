@@ -19,7 +19,7 @@ def known_directions(n, position):
     return total_moves
 
 # Defined the heuristic function (Manhattan distance)
-def Manhattan_diatance(n, state):
+def Manhattan_distance(n, state):
     hn = 0
     for val in range(n*n):
         if state[val] != 0:
@@ -30,7 +30,7 @@ def Manhattan_diatance(n, state):
 
 # Define the A* search algorithm
 def aStar_Search(n, initial_state):
-    open_set = [(Manhattan_diatance(n, initial_state), 0, initial_state.index(0), initial_state)]
+    open_set = [(Manhattan_distance(n, initial_state), 0, initial_state.index(0), initial_state)]
     heapq.heapify(open_set)
     visited = set()
 
@@ -48,7 +48,7 @@ def aStar_Search(n, initial_state):
                 new_state[blank_index], new_state[new_blank_index] = new_state[new_blank_index], new_state[blank_index]
                 new_state = tuple(new_state)
                 if new_state not in visited:
-                    heapq.heappush(open_set, (gn + 1 + Manhattan_diatance(n, new_state), gn + 1, new_blank_index, new_state))
+                    heapq.heappush(open_set, (gn + 1 + Manhattan_distance(n, new_state), gn + 1, new_blank_index, new_state))
     return -1
 
 # Main function prints f(n) = g(n)+ h(n) along with the start state and goal state.
